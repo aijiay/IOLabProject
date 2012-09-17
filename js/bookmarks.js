@@ -9,30 +9,40 @@ $(document).on("ready", function() {
 			$(json).each(function(index) {
 
 				var linkurl=this.u;
-				var html = '<li><a href="' + this.u+'">' +this.d+'</a></li>';
+				
+
+				var html = '<li><a href="' + this.u+'" onClick="javascript: function(){ chrome.tabs.create({url: """google"""});}">' +this.d+'</a><a href=""> Delete </a></li>';
 
 
 				$(html).data('extended', this.n)
 				.data('tags', this.t)
-				.click(function() {
+				/*.click(function() {
 					chrome.tabs.create({url: linkurl});
-				})
+				})*/
 				.appendTo('#bookmarks ul');
+
+
 			});
 
 		}); //END listing all the existing bookmarks
 
 
+
+		//add current page
 		$('#add-current-page-btn').on('click', function() {
+			
 			chrome.tabs.getSelected(null, function (tab) {
-				currURL=tab.url;
-				console.log(currURL);
+				delicious.newURL=tab.url;
+				console.log(delicious.newURL);
+				//alert(delicious.newURL);
+
 			});
 
+			
+		}); //add current page button
 
 
 
-		});
 
 	
 }); //document ready
