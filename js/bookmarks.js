@@ -9,9 +9,9 @@ $(document).on("ready", function() {
 			$(json).each(function(index) {
 
 				var linkurl=this.u;
-				var a = "<a href='#'>"+this.d+"</a>";
+				var a = "<a href='#' class='link'>"+this.d+"</a> <a href='#' class='delete'>Delete</a>";
 				console.log(a);
-				var li = "<li>      blah</li>";
+				var li = "<li></li>";
 
 				
 				$(li).data('extended', this.n)
@@ -20,10 +20,17 @@ $(document).on("ready", function() {
 
 				$('#bookmarks ul li:last').prepend(a);
 
-				$('#bookmarks ul li:last a')
+				$('#bookmarks ul li:last .link')
 				.click(function() {
 					chrome.tabs.create({url: linkurl});
 				});
+
+				$('#bookmarks ul li:last .delete')
+				.click(function() {
+					//QQ: this is where the delete function is, on click.
+				});
+
+
 
 			}); //END each
 
