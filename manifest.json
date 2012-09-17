@@ -12,6 +12,6 @@
   ], 
 
   "content_security_policy": 
-    "script-src 'self' https://feeds.delicious.com; object-src 'self'"
+    "script-src 'self' https://feeds.delicious.com https://people.ischool.berkeley.edu; object-src 'self'"
 
 }
