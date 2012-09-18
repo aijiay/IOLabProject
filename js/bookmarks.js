@@ -9,20 +9,30 @@ $(document).on("ready", function() {
 			$(json).each(function(index) {
 
 				var linkurl=this.u;
+				var a = "<a href='#' class='link'>"+this.d+"</a> <a href='#' class='delete'>Delete</a>";
+				console.log(a);
+				var li = "<li></li>";
+
 				
-
-				var html = '<li><a href="' + this.u+'" onClick="javascript: function(){ chrome.tabs.create({url: """google"""});}">' +this.d+'</a><a href=""> Delete </a></li>';
-
-
-				$(html).data('extended', this.n)
+				$(li).data('extended', this.n)
 				.data('tags', this.t)
-				/*.click(function() {
-					chrome.tabs.create({url: linkurl});
-				})*/
 				.appendTo('#bookmarks ul');
 
+				$('#bookmarks ul li:last').prepend(a);
 
-			});
+				$('#bookmarks ul li:last .link')
+				.click(function() {
+					chrome.tabs.create({url: linkurl});
+				});
+
+				$('#bookmarks ul li:last .delete')
+				.click(function() {
+					//QQ: this is where the delete function is, on click.
+				});
+
+
+
+			}); //END each
 
 		}); //END listing all the existing bookmarks
 
