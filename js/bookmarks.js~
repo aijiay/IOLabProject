@@ -32,7 +32,7 @@ $(document).on("ready", function() {
 					$(this).children().show();
 				});
 
-				$('#bookmarks ul li:last').mouseleave(function(){
+				$('#bookmarks ul li:last').mouseOut(function(){
 					$(this).children(".delete").hide();
 				});
 

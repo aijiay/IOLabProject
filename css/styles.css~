@@ -1,0 +1,9 @@
+.delete {
+	display:none;
+}
+
+.delete:hover {
+	display:block;
+	cursor:pointer;
+	opacity:0.5;
+}
