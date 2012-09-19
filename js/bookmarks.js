@@ -35,20 +35,20 @@ $(document).on("ready", function() {
 				n = posts[i].getAttribute('extended hash');
 				
 				var linkurl=u;
-				var a = "<a href='"+u+"' class='link' id = 'bookmark"+i+"'>"+d+"</a> <span class='label delete' >Delete</span>";
+				var a = "<a href='"+u+"' class='link' >"+d+"</a> <span class='label delete' >Delete</span>";
 				//console.log(a);
-				var li = "<li class='bookmark' ></li>";
-				console.log('oustide i = '+i);
+				var li = "<li id='bookmark"+i+"' ></li>";
 
 				$(li).data('extended', n)
 				.data('tags', t)
 				.appendTo('#bookmarks ul');
 
-				$('#bookmarks ul li:last').prepend(a);
+				$('#bookmark'+i).prepend(a);
 				
-				$('#bookmark'+i).click(function() {
+				$('#bookmark'+i+' .link').click(function() {
+					console.log(this);
 					console.log('click i = '+i);
-					chrome.tabs.create({url: u, active:false});
+					chrome.tabs.create({url: this.href, active:false});
 				});
 
 				$('#bookmarks ul li:last').hover(function(){
@@ -63,6 +63,7 @@ $(document).on("ready", function() {
 				.click(function() {
 					//QQ: this is where the delete function is, on click.
 				});
+
 			} //end for
 
 
