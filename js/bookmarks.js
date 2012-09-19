@@ -1,31 +1,54 @@
 
-var delicious={};
+var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
 	//$('#add-current-page-btn').on("click", function() {
 		var username="trailmaker_test1";
 
-		$.getJSON('https://feeds.delicious.com/v2/json/'
-			+username+'?callback=?', function(json) {
-			
-			$(json).each(function(index) {
+		var postData = {
+			method: 'posts/all',
+			username: delicious.username,
+			password: delicious.password
+		}
 
-				var linkurl=this.u;
-				var a = "<a href='#' class='link'>"+this.d+"</a> <span class='label delete' >Delete</span>";
-				console.log(a);
-				var li = "<li class='bookmark'></li>";
+		$.getJSON('https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?',
+						postData, function(json) {
+			var x=$.parseXML(json.xml);
+
+
+			var posts = x.getElementsByTagName("post");
+			console.log(posts);
+
+			/*
+//var users = xml.getElementsByTagName("user");
+	
+			var $xm=$(x);
+			console.log($xm);
+			var $p=$xm.find("posts");
+
+			console.log($p);
+			*/
+			for (var i =0; i< posts.length; i++) {
 				
-
-
+				u = posts[i].getAttribute('href');
+				d = posts[i].getAttribute('description');
+				t = posts[i].getAttribute('tag');
+				n = posts[i].getAttribute('extended hash');
 				
-				$(li).data('extended', this.n)
-				.data('tags', this.t)
+				var linkurl=u;
+				var a = "<a href='"+u+"' class='link' id = 'bookmark"+i+"'>"+d+"</a> <span class='label delete' >Delete</span>";
+				//console.log(a);
+				var li = "<li class='bookmark' ></li>";
+				console.log('oustide i = '+i);
+
+				$(li).data('extended', n)
+				.data('tags', t)
 				.appendTo('#bookmarks ul');
 
 				$('#bookmarks ul li:last').prepend(a);
 				
-				$('#bookmarks ul li:last .link')
-				.click(function() {
-					chrome.tabs.create({url: linkurl});
+				$('#bookmark'+i).click(function() {
+					console.log('click i = '+i);
+					chrome.tabs.create({url: u, active:false});
 				});
 
 				$('#bookmarks ul li:last').hover(function(){
@@ -40,10 +63,8 @@ $(document).on("ready", function() {
 				.click(function() {
 					//QQ: this is where the delete function is, on click.
 				});
+			} //end for
 
-
-
-			}); //END each
 
 
 
