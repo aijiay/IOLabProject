@@ -1,9 +1,7 @@
 
 var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
-	//$('#add-current-page-btn').on("click", function() {
-		var username="trailmaker_test1";
-
+	
 		var postData = {
 			method: 'posts/all',
 			username: delicious.username,
@@ -18,15 +16,6 @@ $(document).on("ready", function() {
 			var posts = x.getElementsByTagName("post");
 			console.log(posts);
 
-			/*
-//var users = xml.getElementsByTagName("user");
-	
-			var $xm=$(x);
-			console.log($xm);
-			var $p=$xm.find("posts");
-
-			console.log($p);
-			*/
 			for (var i =0; i< posts.length; i++) {
 				
 				u = posts[i].getAttribute('href');
