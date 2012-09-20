@@ -2,7 +2,9 @@
 var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
 
-	
+
+	getBookmarks();
+	function getBookmarks(){
 	var postData = {
 		method: 'posts/all',
 		username: delicious.username,
@@ -41,16 +43,26 @@ $(document).on("ready", function() {
 				chrome.tabs.create({url: this.href, active:false});
 			});
 
-			$('#bookmarks ul li:last').hover(function(){
+			$('#bookmark'+i).hover(function(){
 				$(this).children().show();
 			});
 
-			$('#bookmarks ul li:last').mouseleave(function(){
+			$('#bookmark'+i).mouseleave(function(){
 				$(this).children(".delete").hide();
 			});
 
-			$('#bookmarks ul li:last .delete')
+			$('#bookmark'+i+' .delete')
 			.click(function() {
+				console.log($(this).parent().attr('id'));
+				console.log("clicked");
+				$('#bookmarks').hide();
+				$('#confirm-delete').show();
+				
+				$('#confirm-delete-link').html($(this).parent().clone());
+
+				$('#confirm-delete-ok').click( function() { okDelete(); });
+				$('#confirm-delete-cancel').click( function(){ cancelDelete(); });
+
 				//QQ: this is where the delete function is, on click.
 			});
 
@@ -76,7 +88,18 @@ $(document).on("ready", function() {
 		
 	}); //add current page button
 
+	} // end getBookmarks
 
+	function okDelete(){
+		$('#confirm-delete').hide();
+		// the bookmark gets deleted
+		$('#bookmarks').show();
+	}
+
+	function cancelDelete(){
+		$('#confirm-delete').hide();
+		$('#bookmarks').show();
+	}
 
 
 	

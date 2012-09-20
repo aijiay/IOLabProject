@@ -12,14 +12,20 @@
 
 
 <body>
-<div id="bookmarks-page" class="container">
-	<h1 class="header">Bookmarks</h1>
-	<div id="add-current-page-btn"><button class="btn btn-mini btn-success">[ + ]</button>          Add Current Page</div>
+<div id="bookmarks-page" class="page-content">
+
+	<button class="btn btn-mini btn-success" title="Add current page">[ + ]</button>
 	<!-- <a href="#" id='test'> test </a> -->
 	<div id="bookmarks">
 		<ul id="current-book-marks">
 		
 		</ul>
+	</div>
+	<div id="confirm-delete" style="display:none;" class="page-content">
+		<p>Are you sure you want to delete:</p>
+		<p id="confirm-delete-link"></p>
+		<button id="confirm-delete-ok" class="btn btn-small btn-default"> OK </button>
+		<button id="confirm-delete-cancel" class="btn btn-small btn-default"> Cancel </button>
 	</div>
 
 
