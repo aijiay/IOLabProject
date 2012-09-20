@@ -2,9 +2,12 @@
 var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
 
-
+	console.log("Page loading...");
 	getBookmarks();
+
+
 	function getBookmarks(){
+	
 	var postData = {
 		method: 'posts/all',
 		username: delicious.username,
@@ -12,10 +15,12 @@ $(document).on("ready", function() {
 	}
 
 	$.getJSON('https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?',
-					postData, function(json) {
+		postData, function(json) {
 		var x=$.parseXML(json.xml);
-
-
+		
+		console.log("API call for getBookmarks");
+		$('#loading').hide();
+		$('#bookmarks').show();
 		var posts = x.getElementsByTagName("post");
 		console.log(posts);
 
@@ -59,8 +64,11 @@ $(document).on("ready", function() {
 				$('#confirm-delete').show();
 				
 				$('#confirm-delete-link').html($(this).parent().clone());
-
-				$('#confirm-delete-ok').click( function() { okDelete(); });
+				
+				var deleteLink = $(this).parent().children(".link").attr('href')
+				console.log(deleteLink);
+				
+				$('#confirm-delete-ok').click( function() { okDelete(deleteLink); });
 				$('#confirm-delete-cancel').click( function(){ cancelDelete(); });
 
 				//QQ: this is where the delete function is, on click.
@@ -73,27 +81,42 @@ $(document).on("ready", function() {
 
 	}); //END listing all the existing bookmarks
 
-
-
-	//add current page
-	$('#add-current-page-btn').on('click', function() {
-		
-		chrome.tabs.getSelected(null, function (tab) {
-			delicious.newURL=tab.url;
-			console.log(delicious.newURL);
-			//alert(delicious.newURL);
-
-		});
-
-		
-	}); //add current page button
-
+	//return false;
 	} // end getBookmarks
 
-	function okDelete(){
+
+
+	addCurrentPageBtn();
+	function addCurrentPageBtn(){
+		//add current page
+		$('#add-current-page-btn').on('click', function() {
+		
+			chrome.tabs.getSelected(null, function (tab) {
+				delicious.newURL=tab.url;
+				console.log(delicious.newURL);
+				//alert(delicious.newURL);
+			});		
+		}); //add current page button
+	}
+	function okDelete(url){
+
+		// Reset bookmarks and hide the confirmation page
+		$('#bookmarks').html('<ul id="current-book-marks"></ul>');
 		$('#confirm-delete').hide();
-		// the bookmark gets deleted
-		$('#bookmarks').show();
+		$('#loading').show();
+		// del.icio.us API call
+		var postData = {
+			url: url,
+			method: 'posts/delete',
+			username: delicious.username,
+			password: delicious.password
+		}
+		$.getJSON('https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?',
+			postData, function(json) {
+				console.log("Bookmark deleted");
+				getBookmarks(); // get updated list of bookmarks
+			});
+		return false;
 	}
 
 	function cancelDelete(){
