@@ -22,7 +22,7 @@ $(document).on("ready", function() {
 		$('#loading').hide();
 		$('#bookmarks').show();
 		var posts = x.getElementsByTagName("post");
-		console.log(posts);
+		//console.log(posts);
 
 		for (var i =0; i< posts.length; i++) {
 			
@@ -63,7 +63,9 @@ $(document).on("ready", function() {
 				$('#bookmarks').hide();
 				$('#confirm-delete').show();
 				
-				$('#confirm-delete-link').html($(this).parent().clone());
+				var cloneLink = $(this).parent().clone();
+				$(cloneLink).children(".delete").hide();
+				$('#confirm-delete-link').html(cloneLink);
 				
 				var deleteLink = $(this).parent().children(".link").attr('href')
 				console.log(deleteLink);
@@ -89,8 +91,11 @@ $(document).on("ready", function() {
 		} //end for
 
 	}); //END listing all the existing bookmarks
-	$(window).height( $('#bookmarks-page').css('height'));
-	} // end getBookmarks
+	// $(window).height( $('#bookmarks-page').css('height'));
+	document.body.style.height= $('#bookmarks-page').css('height');
+	document.getElementsByTagName("html")[0].style.height=$('#bookmarks-page').css('height');
+	
+	} // end getBookmarka
 
 
 
