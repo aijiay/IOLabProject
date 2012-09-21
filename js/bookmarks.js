@@ -1,9 +1,12 @@
 
 var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
-
+	
+	
 	console.log("Page loading...");
 	getBookmarks();
+
+
 
 
 	function getBookmarks(){
@@ -76,6 +79,10 @@ $(document).on("ready", function() {
 				//QQ: this is where the delete function is, on click.
 			});
 
+		
+
+
+
 			// widen page width if necessary
 			// if this page is wider than the longest existing link...
 /*
@@ -95,23 +102,37 @@ $(document).on("ready", function() {
 	document.body.style.height= $('#bookmarks-page').css('height');
 	document.getElementsByTagName("html")[0].style.height=$('#bookmarks-page').css('height');
 	
-	} // end getBookmarka
+	//var newBookmarkDes;
+
+	$("#submit-bookmark").on("click", function() {
+			$('#description-text').val()
+			.appendTo('#bookmarks ul'); });
+		
+	
 
 
+	} // end getBookmark
 
 	addCurrentPageBtn();
+
 	function addCurrentPageBtn(){
 		//add current page
-		$('#add-current-page-btn').on('click', function() {
+	
 		
+		$('#add-current-page-btn').on('click', function() {
+			
 			chrome.tabs.getSelected(null, function (tab) {
 				delicious.newURL=tab.url;
 				console.log(delicious.newURL);
+				//$('#url-text').val = delicious.newURL;
 				//alert(delicious.newURL);
+				
 			});		
-		}); //add current page button
+		}); 
+		//add current page button
 	}
-
+		
+	
 	function okDelete(url){
 
 		// Reset bookmarks and hide the confirmation page
@@ -140,7 +161,6 @@ $(document).on("ready", function() {
 		$('#confirm-delete-cancel').unbind('click');
 		$('#bookmarks').show();
 	}
-
 
 	
 }); //document ready
