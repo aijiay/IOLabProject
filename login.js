@@ -26,7 +26,8 @@
                     			$.getJSON('https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?',
 						postData,
                      				function(rsp){
-							alert(rsp.result_code);
+							console.log(rsp.result_code);
+						//	alert(rsp.result_code);
                         			//	window.open("page2.html", "_self");
                    					 if (rsp.result_code === "access denied") {
                        						 alert('The provided Delicious username and password are incorrect.');

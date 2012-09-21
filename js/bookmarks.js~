@@ -3,7 +3,55 @@ var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
 
 	console.log("Page loading...");
-	getBookmarks();
+	
+	loginPage();
+	function loginPage(){
+		$('#loading').hide();
+		$('#bookmarks-page').hide();
+
+		document.body.style.height= '200px';
+		document.getElementsByTagName("html")[0].style.height= '200px';
+	
+	}
+	// getBookmarks();
+	
+	$('#login-form').on("submit", function(){
+		delicious.username = $('#username').val();
+		delicious.password = $('#password').val();
+		console.log("Login clicked");
+		checkLogin();
+		return false;
+	});
+
+	function checkLogin(){
+
+		console.log(delicious.username);
+		console.log(delicious.password);
+		console.log("U/P printed inside saveLogin()");
+
+		var postData = {
+			method: 'posts/get',
+                    	username: delicious.username,
+                    	password: delicious.password
+               	};
+
+                $.getJSON('https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?',
+						postData,
+                     				function(rsp){
+                   					 if (rsp.result_code === "access denied") {
+                       						 alert('The provided Delicious username and password are incorrect.');
+                   					 } else if (rsp.result_code === "something went wrong") {
+                       						 alert('There was an unspecified error communicating with Delicious.');
+                  					 
+                       					 } else {
+                            					// We're ok - continue with the login;
+
+								getBookmarks();
+                       					 }
+                    				});
+					
+					//return false;
+	}
 
 
 	function getBookmarks(){
@@ -20,9 +68,12 @@ $(document).on("ready", function() {
 		
 		console.log("API call for getBookmarks");
 		$('#loading').hide();
+		$('#login-page').hide();
+		console.log("Login page hide called");
+		$('#bookmarks-page').show();
 		$('#bookmarks').show();
 		var posts = x.getElementsByTagName("post");
-		//console.log(posts);
+		console.log(posts);
 
 		for (var i =0; i< posts.length; i++) {
 			
@@ -33,7 +84,7 @@ $(document).on("ready", function() {
 			
 			var linkurl=u;
 			var a = "<a href='"+u+"' class='link' >"+d+"</a> <span class='label delete' >Delete</span>";
-			//console.log(a);
+			console.log(a);
 			var li = "<li id='bookmark"+i+"' class='bookmark' ></li>";
 
 			$(li).data('extended', n)
@@ -60,7 +111,8 @@ $(document).on("ready", function() {
 			.click(function() {
 				console.log($(this).parent().attr('id'));
 				console.log("clicked");
-				$('#bookmarks').hide();
+				$('#bookmarks-page').hide();
+
 				$('#confirm-delete').show();
 				
 				var cloneLink = $(this).parent().clone();
@@ -91,17 +143,15 @@ $(document).on("ready", function() {
 		} //end for
 
 	}); //END listing all the existing bookmarks
+
+	addCurrentPageBtn();
+
 	// $(window).height( $('#bookmarks-page').css('height'));
-	document.body.style.width= $('#bookmarks-page').css('width');
 	document.body.style.height= $('#bookmarks-page').css('height');
-	document.getElementsByTagName("html")[0].style.width=$('#bookmarks-page').css('width');
 	document.getElementsByTagName("html")[0].style.height=$('#bookmarks-page').css('height');
 	
 	} // end getBookmarka
 
-
-
-	addCurrentPageBtn();
 	function addCurrentPageBtn(){
 		//add current page
 		$('#add-current-page-btn').on('click', function() {
@@ -109,7 +159,7 @@ $(document).on("ready", function() {
 			chrome.tabs.getSelected(null, function (tab) {
 				delicious.newURL=tab.url;
 				console.log(delicious.newURL);
-				//alert(delicious.newURL);
+				alert(delicious.newURL);
 			});		
 		}); //add current page button
 	}
@@ -137,10 +187,11 @@ $(document).on("ready", function() {
 	}
 
 	function cancelDelete(){
+		$('#bookmarks-page').show();
 		$('#confirm-delete').hide();
 		$('#confirm-delete-ok').unbind('click');
 		$('#confirm-delete-cancel').unbind('click');
-		$('#bookmarks').show();
+
 	}
 
 
