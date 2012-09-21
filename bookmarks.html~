@@ -27,7 +27,9 @@
 		<button id="confirm-delete-ok" class="btn btn-small btn-default"> OK </button>
 		<button id="confirm-delete-cancel" class="btn btn-small btn-default"> Cancel </button>
 	</div>
-
+	<div id="loading">
+		<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">x</button><strong>Loading bookmarks...</strong></div>
+	</div>
 
 </div>
 </body>

@@ -34,7 +34,7 @@ $(document).on("ready", function() {
 			var linkurl=u;
 			var a = "<a href='"+u+"' class='link' >"+d+"</a> <span class='label delete' >Delete</span>";
 			//console.log(a);
-			var li = "<li id='bookmark"+i+"' ></li>";
+			var li = "<li id='bookmark"+i+"' class='bookmark' ></li>";
 
 			$(li).data('extended', n)
 			.data('tags', t)
@@ -74,14 +74,22 @@ $(document).on("ready", function() {
 				//QQ: this is where the delete function is, on click.
 			});
 
+			// widen page width if necessary
+			// if this page is wider than the longest existing link...
+/*
+			var linkWidth = $('#bookmark'+i+' .link').css('width');
+			console.log("link width");
+			console.log(linkWidth);
+			if (linkWidth >= $('.container').css('width')){
+				$('.container').css({ width: linkWidth });
+			}*/
+
+			// then set container to new width.
+
 		} //end for
 
-
-
-
 	}); //END listing all the existing bookmarks
-
-	//return false;
+	$(window).height( $('#bookmarks-page').css('height'));
 	} // end getBookmarks
 
 
@@ -98,10 +106,13 @@ $(document).on("ready", function() {
 			});		
 		}); //add current page button
 	}
+
 	function okDelete(url){
 
 		// Reset bookmarks and hide the confirmation page
 		$('#bookmarks').html('<ul id="current-book-marks"></ul>');
+		$('#confirm-delete-ok').unbind('click');
+		$('#confirm-delete-cancel').unbind('click');
 		$('#confirm-delete').hide();
 		$('#loading').show();
 		// del.icio.us API call
@@ -116,11 +127,12 @@ $(document).on("ready", function() {
 				console.log("Bookmark deleted");
 				getBookmarks(); // get updated list of bookmarks
 			});
-		return false;
 	}
 
 	function cancelDelete(){
 		$('#confirm-delete').hide();
+		$('#confirm-delete-ok').unbind('click');
+		$('#confirm-delete-cancel').unbind('click');
 		$('#bookmarks').show();
 	}
 
