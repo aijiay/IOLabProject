@@ -8,6 +8,8 @@ $(document).on("ready", function() {
 
 $('#initial-btn').on('click', function() {
 	var trailname = "Test Trail";
+
+	
 	chrome.windows.getCurrent (function (win) {
 		chrome.tabs.getAllInWindow (win.id, function (tabs) {
 			for (var i=0; i<tabs.length; i++) {
@@ -23,8 +25,13 @@ $('#initial-btn').on('click', function() {
 
 			} //end for loop
 
-		});
-	});
+		}); });
+
+	/*var tab= {};
+	tab.url="blah";
+	tab.title="tIIIItle";
+	tabsData.push (tab);
+	*/
 
 	console.log(tabsData);
 	console.log("Weeeee");
@@ -39,6 +46,29 @@ $('#submit-login').on('click', function(){
 	checkLogin();
 	return false;
 });
+
+
+$('#enter-trail-name').on('submit', function () {
+
+	$("#enter-trail-name").hide();
+	$("#loading").show();
+
+
+	trailname = $('#new-trailname').val();
+	console.log(tabsData);
+	console.log(trailname);
+	console.log(tabsData.length);
+	// call saveTrail function
+	saveTrail();
+
+	return false;
+
+}); //enter-trail-name submit
+
+
+}); // end of document-on-ready
+
+
 
 
 function checkLogin(){
@@ -75,35 +105,12 @@ function checkLoginComplete(){
 }
 
 
-$('#enter-trail-name').on('submit', function () {
-
-	$("#enter-trail-name").hide();
-	$("#loading").show();
-
-
-	trailname = $('#new-trailname').val();
-	console.log(tabsData);
-	console.log(trailname);
-	console.log(tabsData.length);
-	// call saveTrail function
-	saveTrail();
-
-	return false;
-
-}); //enter-trail-name submit
-
-
-}); // end of document-on-ready
-
-
-
-
 function saveTrail() {
-	alert(trailname);
-	alert("entered save Trail");
+	//alert(trailname);
+	//alert("entered save Trail");
 	var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
-	alert(newTrailName);
-	alert("Before post data");
+	//alert(newTrailName);
+	//alert("Before post data");
 	var postData = {
                 url: tabsData[0].url,
                 description: tabsData[0].title,
@@ -114,17 +121,17 @@ function saveTrail() {
                 password: delicious.password
 
             };	
-		alert("postData: " +  tabsData[0].title);
-
+		//alert("postData: " +  tabsData[0].title);
+		console.log(postData);
         $.getJSON("https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?",
                 postData,
                  function(rsp){
 
-			 alert("function rsp called");
+			//alert("function rsp called");
                     if (rsp.result_code === "access denied") {
-                        alert('The provided Delicious username and password are incorrect.');
+                        //alert('The provided Delicious username and password are incorrect.');
                     } else if (rsp.result_code === "something went wrong") {
-                        alert('There was an unspecified error communicating with Delicious.');
+                        //alert('There was an unspecified error communicating with Delicious.');
                     } else if (rsp.result_code === "done") {
                         // Bookmark was saved properly
                         //$('#new-trail li:first').remove(); // Remove the line for the bookmark we just saved
@@ -140,26 +147,26 @@ function saveTrail() {
                         //}
 			//
 					// tabsDataIndex = tabsDataIndex + 1; 
-					alert("Done");
+					//alert("Done");
 					tabsData.splice(0,1);
 					if (tabsData.length > 0) {
 						
-					alert("SAVE this TRAIL");
+							//alert("SAVE this TRAIL");
 
 		                        $("#saving").append ("# " + tabsDataIndex + " is saved.");
 		                        console.log ("# "+ tabsDataIndex +" is saved.");
-					tabsDataIndex++;
+								tabsDataIndex++;
 		                        setTimeout(saveTrail, 1000);
 		                        
 		            } else {
-		            	alert ("It's allsaved");
+		            	console.log ("It's allsaved");
 		            }
 		}
                 });
 		
 	//} //end for loop
 
-	alert("DONE SAVE TRAIL");
+	console.log("DONE SAVE TRAIL");
 
 }// end of function
 
