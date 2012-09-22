@@ -5,7 +5,7 @@
   "description": "The first extension that I made.",
   "browser_action": {
     "default_icon": "delicious_chrome_.png",
-    "default_popup": "popup.html"
+    "default_popup": "bookmarks.html"
   },
   "permissions": [
    "tabs"

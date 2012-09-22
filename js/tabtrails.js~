@@ -26,7 +26,6 @@ $('#initial-btn').on('click', function() {
 	});
 
 	console.log(tabsData);
-	console.log("Weeeee");
 	$('#start-page').hide();
 	$('#login-page').show();
 
