@@ -4,8 +4,7 @@
 	 
 	<link rel="stylesheet" href="css/styles.css" />
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bookmarks.js"></script>
-	<script type="text/javascript" src="js/getSelection.js"></script>
+	<script type="text/javascript" src="js/tabtrails.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.css" />
 
 	 
@@ -13,14 +12,17 @@
 
 
 <body>
+	<div id="start-page" class="container">
 
+		<button id="initial-button" class="btn btn-success"><i class="icon-leaf"></i></button>Save Tabs as New Trail
+	</div>
 
-	<div id="login-page" >
+	<div id="login-page" style="display:none;">
 		<div class="header-bar"> </div>
 		<div class="page-content">
 		<form id="login-form" accept-charset="utf-8" method="post">
 
-a			<label for="username">Username: </label><input id="username" type="text" class="input-medium" /><br />
+			<label for="username">Username: </label><input id="username" type="text" class="input-medium" /><br />
 			<label for="password">Password: </label><input id="password" type="password" class="input-medium" /><br />
 			<input id="submit-login" class="btn btn-success" type="submit" value="Sign In" />
 
@@ -30,30 +32,31 @@ a			<label for="username">Username: </label><input id="username" type="text" cla
 		<div class="footer-bar"> </div>
 	</div>
 	
-	<div id="bookmarks-page" class="container">
 
+
+
+	<form id="enter-trail-name" style="display:none;" class="container">
 		<div class="header-bar"> </div>
-		
+		<p>Enter a name for the new trail!</p>
+		<input type="text" name="trail-name" />
+		<input type="submit" name="save-btn" value="Save" />
 		<div class="footer-bar"> </div>
-	</div>
+	</form>
 
-
-	<div id="enter-trail-name" style="display:none;" class="container">
-		<div class="header-bar"> </div>
-		
-		</div>
-		<div class="footer-bar"> </div>
-	</div>
-
-	<div id="loading">
+	<div id="loading" style="display:none;">
 		<div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><strong>Saving new trail...</strong></div>
 	</div>
 
 	<!--Bookmark added!-->
-	<div id="trail-added-page" class="container">
+	<div id="trail-added-page" class="container" style="display:none;">
 		<div class="header-bar"> </div>
 	
 		<div class="footer-bar"> </div>
+	</div>
+
+	<!--saving the current trail-->
+	<div id="saving" style="display:none;">
+		<div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><strong>Saving the new trail..</strong></div>
 	</div>
 	
 </div>

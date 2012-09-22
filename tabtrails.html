@@ -4,8 +4,7 @@
 	 
 	<link rel="stylesheet" href="css/styles.css" />
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bookmarks.js"></script>
-	<script type="text/javascript" src="js/getSelection.js"></script>
+	<script type="text/javascript" src="js/tabtrails.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.css" />
 
 	 
@@ -15,9 +14,7 @@
 <body>
 	<div id="start-page" class="container">
 
-		<div class="header-bar"> </div>
-		
-		<div class="footer-bar"> </div>
+		<button id="initial-btn" class="btn btn-success"><i class="icon-leaf"></i></button>Save Tabs as New Trail
 	</div>
 
 	<div id="login-page" style="display:none;">
@@ -58,7 +55,7 @@
 	</div>
 
 	<!--saving the current trail-->
-	<div id="saving">
+	<div id="saving" style="display:none;">
 		<div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><strong>Saving the new trail..</strong></div>
 	</div>
 	
