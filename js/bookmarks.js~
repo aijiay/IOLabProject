@@ -1,13 +1,15 @@
 
 var delicious={username: 'ruidai', password: 'iolab1234'};
 $(document).on("ready", function() {
-
+	
+	
 	console.log("Page loading...");
 	
 	loginPage();
 	function loginPage(){
 		$('#loading').hide();
 		$('#bookmarks-page').hide();
+		$('#bookmark-added-page').hide();
 
 		document.body.style.height= '200px';
 		document.getElementsByTagName("html")[0].style.height= '200px';
@@ -52,6 +54,8 @@ $(document).on("ready", function() {
 					
 					//return false;
 	}
+
+
 
 
 	function getBookmarks(){
@@ -128,6 +132,10 @@ $(document).on("ready", function() {
 				//QQ: this is where the delete function is, on click.
 			});
 
+		
+
+
+
 			// widen page width if necessary
 			// if this page is wider than the longest existing link...
 /*
@@ -144,26 +152,48 @@ $(document).on("ready", function() {
 
 	}); //END listing all the existing bookmarks
 
-	addCurrentPageBtn();
 
 	// $(window).height( $('#bookmarks-page').css('height'));
 	document.body.style.height= $('#bookmarks-page').css('height');
 	document.getElementsByTagName("html")[0].style.height=$('#bookmarks-page').css('height');
 	
-	} // end getBookmarka
+	//var newBookmarkDes;
+
+	$("#submit-bookmark").on("click", function() {
+			$('#description-text').val()
+			.appendTo('#bookmarks ul'); });
+		
+	
+
+
+
+	} // end getBookmark
+
+	addCurrentPageBtn();
 
 	function addCurrentPageBtn(){
 		//add current page
-		$('#add-current-page-btn').on('click', function() {
+	
 		
+		$('#add-current-page-btn').on('click', function() {
+			
 			chrome.tabs.getSelected(null, function (tab) {
 				delicious.newURL=tab.url;
 				console.log(delicious.newURL);
-				alert(delicious.newURL);
-			});		
-		}); //add current page button
-	}
 
+				alert(delicious.newURL);
+				
+				$('#bookmark-added-page').show();
+				$('#bookmarks-page').hide();
+				$('#url-text').attr('value') = delicious.newURL;
+				//alert(delicious.newURL);
+
+			});		
+		}); 
+		//add current page button
+	}
+		
+	
 	function okDelete(url){
 
 		// Reset bookmarks and hide the confirmation page
@@ -193,7 +223,6 @@ $(document).on("ready", function() {
 		$('#confirm-delete-cancel').unbind('click');
 
 	}
-
 
 	
 }); //document ready

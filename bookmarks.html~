@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="css/styles.css" />
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bookmarks.js"></script>
+	<script type="text/javascript" src="js/getSelection.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.css" />
 
 	 
@@ -12,6 +13,7 @@
 
 
 <body>
+
 
 	<div id="login-page" >
 		<div class="header-bar"> </div>
@@ -31,7 +33,10 @@
 	<div id="bookmarks-page" class="container">
 
 		<div class="header-bar"> </div>
-	<button class="btn btn-mini btn-success" title="Add current page">[ + ]</button>
+		<!-- <button class="btn btn-mini btn-success" title="Add current page">[ + ]</button> -->
+
+	<button class="btn btn-mini btn-success"  id="add-current-page-btn">[ + ]</button>
+
 	<!-- <a href="#" id='test'> test </a> -->
 	<div id="bookmarks">
 		<ul id="current-book-marks">
@@ -57,7 +62,20 @@
 		<div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><strong>Loading bookmarks...</strong></div>
 	</div>
 
+	<!--Bookmark added!-->
+	<div id="bookmark-added-page" class="container">
+		<div class="header-bar"> </div>
+	<form id="bookmark-added" class="container page-content"><p>Bookmark added!</p> 
+		<label>URL: </label><input type="text" id="url-text" />
+		<label>Description: </label><input id="description-text" type="text" />
+
+		<input type="submit" id="submit-bookmark" value="Ok" />
+	</form>
+		<div class="footer-bar"> </div>
+	</div>
+	
 </div>
+
 </body>
 
 
