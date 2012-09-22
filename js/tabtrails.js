@@ -37,7 +37,7 @@ $('#submit-login').on('click', function(){
 	delicious.username = $('#username').val();
 	delicious.password = $('#password').val();
 	checkLogin();
-	return false;
+	//return false;
 });
 
 
@@ -101,21 +101,20 @@ function saveTrail() {
 	alert("entered save Trail");
 	var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
 	
-	for (var i=0; i < tabsData.length; i++) {
+	
+	alert("Index: " + tabsDataIndex);
 
-		alert("for loop " + i);
+	var t = tabsData[tabsDataIndex];
+	var postData = {
+                url: t.url,
+                description: t.title,
+                //extended: bookmark.data('extended'),
+                tags: newTrailName + ',' + 'step:' + i,
+                method: 'posts/add',
+                username: delicious.username,
+                password: delicious.password
 
-		var t = tabsData[i];
-		var postData = {
-                    url: t.url,
-                    description: t.title,
-                    //extended: bookmark.data('extended'),
-                    tags: newTrailName + ',' + 'step:' + i,
-                    method: 'posts/add',
-                    username: delicious.username,
-                    password: delicious.password
-
-                };	
+            };	
 
         $.getJSON("https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?",
                 postData,
@@ -138,17 +137,21 @@ function saveTrail() {
                          //   alert ("Your trail has been saved!");
                         //}
 			//
-			if ()
-			alert("SAVE this TRAIL");
+					if (tabsDataIndex < tabsData.length -1) {
+								tabsDataIndex = tabsDataIndex+1; 
+								alert("SAVE this TRAIL");
 
-                        $("#saving").append ("# " + i + " is saved.");
-                        console.log ("# "+ i +" is saved.");
-
-                        
-                    }
+		                        $("#saving").append ("# " + tabsDataIndex + " is saved.");
+		                        console.log ("# "+ tabsDataIndex +" is saved.");
+		                        setTimeout(saveTrail, 1000);
+		                        
+		            } else {
+		            	alert ("It's allsaved");
+		            }
+		}
                 });
-		setTimeout(function(){}, 1000);
-	} //end for loop
+		
+	//} //end for loop
 
 	alert("DONE SAVE TRAIL");
 
