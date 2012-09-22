@@ -33,34 +33,29 @@ $('#initial-btn').on('click', function() {
 }); // end of initial-btn click function
 
 
-		/* var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
+$('#enter-trail-name').on('submit', function () {
+	alert ("SAVE clicked");
 
-		var postData = {
-                    url: t.url,
-                    description: t.title,
-                    //extended: bookmark.data('extended'),
-                    tags: newTrailName + ',' + 'step:' + i,
-                    method: 'posts/add',
-                    username: delicious.username,
-                    password: delicious.password
-                };
-		*/
-                // saveTrail(postData);
+	$("#enter-trail-name").hide();
+	$("#loading").show();
 
 
 
-
+}); //enter-trail-name submit
 
 });
 
 
 function saveTrail (data, trailname) {
+	var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
+
+
+
 	for (var i=0; i < data.length; i++) {
 
 
 		t=data[i];
 
-		var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
 
 
 		var postData = {
@@ -95,6 +90,8 @@ function saveTrail (data, trailname) {
                          //   alert ("Your trail has been saved!");
                         //}
 
+                        $("#saving").append ("# " + i + " is saved.");
+                        console.log ("# "+ i +" is saved.");
 
                         
                     }
