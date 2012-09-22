@@ -1,5 +1,7 @@
 var delicious={};
 var tabsData = [];
+var tabsDataIndex = 0;
+var trailname = {};
 
 $(document).on("ready", function() {
 
@@ -74,18 +76,17 @@ function checkLoginComplete(){
 
 
 $('#enter-trail-name').on('submit', function () {
-	alert ("SAVE clicked");
 
 	$("#enter-trail-name").hide();
 	$("#loading").show();
 
 
-	var trailname = $('#new-trailname').val();
+	trailname = $('#new-trailname').val();
 	console.log(tabsData);
 	console.log(trailname);
 	console.log(tabsData.length);
 	// call saveTrail function
-	saveTrail(tabsData, trailname);
+	saveTrail(trailname);
 
 	return false;
 
@@ -96,16 +97,15 @@ $('#enter-trail-name').on('submit', function () {
 
 
 
-function saveTrail(data, trailname) {
+function saveTrail() {
 	alert("entered save Trail");
 	var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
-
-	/*
-	for (var i=0; i < data.length; i++) {
+	
+	for (var i=0; i < tabsData.length; i++) {
 
 		alert("for loop " + i);
 
-		t=data[i];
+		var t = tabsData[i];
 		var postData = {
                     url: t.url,
                     description: t.title,
@@ -137,6 +137,9 @@ function saveTrail(data, trailname) {
                          //   window.delicious_password = null;
                          //   alert ("Your trail has been saved!");
                         //}
+			//
+			if ()
+			alert("SAVE this TRAIL");
 
                         $("#saving").append ("# " + i + " is saved.");
                         console.log ("# "+ i +" is saved.");
@@ -146,7 +149,7 @@ function saveTrail(data, trailname) {
                 });
 		setTimeout(function(){}, 1000);
 	} //end for loop
-*/
+
 	alert("DONE SAVE TRAIL");
 
 }// end of function
