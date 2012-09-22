@@ -25,7 +25,7 @@
 		<div class="page-content">
 		<form id="login-form" accept-charset="utf-8" method="post">
 
-a			<label for="username">Username: </label><input id="username" type="text" class="input-medium" /><br />
+			<label for="username">Username: </label><input id="username" type="text" class="input-medium" /><br />
 			<label for="password">Password: </label><input id="password" type="password" class="input-medium" /><br />
 			<input id="submit-login" class="btn btn-success" type="submit" value="Sign In" />
 
@@ -38,12 +38,13 @@ a			<label for="username">Username: </label><input id="username" type="text" cla
 
 
 
-	<div id="enter-trail-name" style="display:none;" class="container">
+	<form id="enter-trail-name" style="display:none;" class="container">
 		<div class="header-bar"> </div>
-		
-		
+		<p>Enter a name for the new trail!</p>
+		<input type="text" name="trail-name" />
+		<input type="submit" name="save-btn" value="Save" />
 		<div class="footer-bar"> </div>
-	</div>
+	</form>
 
 	<div id="loading" style="display:none;">
 		<div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><strong>Saving new trail...</strong></div>
@@ -54,6 +55,11 @@ a			<label for="username">Username: </label><input id="username" type="text" cla
 		<div class="header-bar"> </div>
 	
 		<div class="footer-bar"> </div>
+	</div>
+
+	<!--saving the current trail-->
+	<div id="saving">
+		<div class="alert"><button type="button" class="close" data-dismiss="alert">x</button><strong>Saving the new trail..</strong></div>
 	</div>
 	
 </div>
