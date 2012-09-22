@@ -163,9 +163,31 @@ $(document).on("ready", function() {
 			$('#description-text').val()
 			.appendTo('#bookmarks ul'); });
 		
+<<<<<<< HEAD
 	
+=======
+		/*chrome.tabs.getSelected(null, function (tab) {
+			delicious.newURL=tab.url;
+			console.log(delicious.newURL);
+			//alert(delicious.newURL);
+>>>>>>> tabtrails.js
 
 
+<<<<<<< HEAD
+=======
+		*/
+		console.log("blah");
+		chrome.windows.getCurrent (function (win) {
+			chrome.tabs.getAllInWindow (win.id, function (tabs) {
+				console.log(tabs)
+
+
+
+		});
+
+		});
+	}); //add current page button
+>>>>>>> tabtrails.js
 
 	} // end getBookmark
 
