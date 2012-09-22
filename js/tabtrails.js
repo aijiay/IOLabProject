@@ -1,7 +1,7 @@
 var delicious={};
 var tabsData = [];
 var tabsDataIndex = 0;
-var trailname = {};
+var trailname;
 
 $(document).on("ready", function() {
 
@@ -37,7 +37,7 @@ $('#submit-login').on('click', function(){
 	delicious.username = $('#username').val();
 	delicious.password = $('#password').val();
 	checkLogin();
-	//return false;
+	return false;
 });
 
 
@@ -86,43 +86,45 @@ $('#enter-trail-name').on('submit', function () {
 	console.log(trailname);
 	console.log(tabsData.length);
 	// call saveTrail function
-	saveTrail(trailname);
+	saveTrail();
 
 	return false;
 
 }); //enter-trail-name submit
 
 
+}); // end of document-on-ready
 
 
 
 
 function saveTrail() {
+	alert(trailname);
 	alert("entered save Trail");
 	var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
-	
-	
-	alert("Index: " + tabsDataIndex);
-
-	var t = tabsData[tabsDataIndex];
+	alert(newTrailName);
+	alert("Before post data");
 	var postData = {
-                url: t.url,
-                description: t.title,
+                url: tabsData[0].url,
+                description: tabsData[0].title,
                 //extended: bookmark.data('extended'),
-                tags: newTrailName + ',' + 'step:' + i,
+                tags: newTrailName + ',' + 'step:' + 99,
                 method: 'posts/add',
                 username: delicious.username,
                 password: delicious.password
 
             };	
+		alert("postData: " +  tabsData[0].title);
 
         $.getJSON("https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?",
                 postData,
                  function(rsp){
+
+			 alert("function rsp called");
                     if (rsp.result_code === "access denied") {
-                        console.log('The provided Delicious username and password are incorrect.');
+                        alert('The provided Delicious username and password are incorrect.');
                     } else if (rsp.result_code === "something went wrong") {
-                        console.log('There was an unspecified error communicating with Delicious.');
+                        alert('There was an unspecified error communicating with Delicious.');
                     } else if (rsp.result_code === "done") {
                         // Bookmark was saved properly
                         //$('#new-trail li:first').remove(); // Remove the line for the bookmark we just saved
@@ -137,12 +139,16 @@ function saveTrail() {
                          //   alert ("Your trail has been saved!");
                         //}
 			//
-					if (tabsDataIndex < tabsData.length -1) {
-								tabsDataIndex = tabsDataIndex+1; 
-								alert("SAVE this TRAIL");
+					// tabsDataIndex = tabsDataIndex + 1; 
+					alert("Done");
+					tabsData.splice(0,1);
+					if (tabsData.length > 0) {
+						
+					alert("SAVE this TRAIL");
 
 		                        $("#saving").append ("# " + tabsDataIndex + " is saved.");
 		                        console.log ("# "+ tabsDataIndex +" is saved.");
+					tabsDataIndex++;
 		                        setTimeout(saveTrail, 1000);
 		                        
 		            } else {
@@ -157,4 +163,3 @@ function saveTrail() {
 
 }// end of function
 
-}); // end of document-on-ready
