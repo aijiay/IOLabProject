@@ -5,7 +5,6 @@ $(document).on("ready", function() {
 
 
 $('#initial-btn').on('click', function() {
-	alert("CLICKED");
 	var trailname = "Test Trail";
 	chrome.windows.getCurrent (function (win) {
 		chrome.tabs.getAllInWindow (win.id, function (tabs) {
@@ -73,8 +72,40 @@ function checkLoginComplete(){
 	$('#enter-trail-name').show();
 }
 
-		/* var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
 
+$('#enter-trail-name').on('submit', function () {
+	alert ("SAVE clicked");
+
+	$("#enter-trail-name").hide();
+	$("#loading").show();
+
+
+	var trailname = $('#new-trailname').val();
+	console.log(tabsData);
+	console.log(trailname);
+	console.log(tabsData.length);
+	// call saveTrail function
+	saveTrail(tabsData, trailname);
+
+	return false;
+
+}); //enter-trail-name submit
+
+
+
+
+
+
+function saveTrail(data, trailname) {
+	alert("entered save Trail");
+	var newTrailName = 'trail:' + trailname.toLowerCase().replace(/ /g, '_');
+
+	/*
+	for (var i=0; i < data.length; i++) {
+
+		alert("for loop " + i);
+
+		t=data[i];
 		var postData = {
                     url: t.url,
                     description: t.title,
@@ -83,14 +114,41 @@ function checkLoginComplete(){
                     method: 'posts/add',
                     username: delicious.username,
                     password: delicious.password
-                };
-		*/
-                // saveTrail(postData);
 
+                };	
 
+        $.getJSON("https://people.ischool.berkeley.edu/~qqz/delicious_proxy.php?callback=?",
+                postData,
+                 function(rsp){
+                    if (rsp.result_code === "access denied") {
+                        console.log('The provided Delicious username and password are incorrect.');
+                    } else if (rsp.result_code === "something went wrong") {
+                        console.log('There was an unspecified error communicating with Delicious.');
+                    } else if (rsp.result_code === "done") {
+                        // Bookmark was saved properly
+                        //$('#new-trail li:first').remove(); // Remove the line for the bookmark we just saved
+                        //if ($('#new-trail li').length > 0) {
+                            // Save the next bookmark in the trail in 1000ms (1 second)
+                            // We have to wait this period of time to comply with the
+                            // terms of the Delicious API. If we don't we may have access denied.
+                            //setTimeout(saveTrail, 1000);
+                        //} else {
+                            // We're done saving the trail
+                         //   window.delicious_password = null;
+                         //   alert ("Your trail has been saved!");
+                        //}
 
+                        $("#saving").append ("# " + i + " is saved.");
+                        console.log ("# "+ i +" is saved.");
 
-	
+                        
+                    }
+                });
+		setTimeout(function(){}, 1000);
+	} //end for loop
+*/
+	alert("DONE SAVE TRAIL");
 
+}// end of function
 
 }); // end of document-on-ready
