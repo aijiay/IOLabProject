@@ -20,6 +20,7 @@ $('#initial-btn').on('click', function() {
 				var tab = {};
 				tab.url = t.url;
 				tab.title = t.title;
+				tab.step = i;
 
 				tabsData.push(tab);
 
@@ -115,7 +116,7 @@ function saveTrail() {
                 url: tabsData[0].url,
                 description: tabsData[0].title,
                 //extended: bookmark.data('extended'),
-                tags: newTrailName + ',' + 'step:' + 99,
+                tags: newTrailName + ',' + 'step:' + tabsData[0].step,
                 method: 'posts/add',
                 username: delicious.username,
                 password: delicious.password
@@ -160,6 +161,8 @@ function saveTrail() {
 		                        
 		            } else {
 		            	console.log ("It's allsaved");
+				$('#finished').show();
+				$('#loading').hide();
 		            }
 		}
                 });
