@@ -45,17 +45,18 @@ $('#submit-login').on('click', function(){
 
 $('#enter-trail-name').on('submit', function () {
 
-	$("#enter-trail-name").hide();
-	$("#loading").show();
 
 
 
 	trailname = $('#new-trailname').val();
 
 	if ($.trim(trailname) ==="") {
-		$('#no-trail-name-error').show();
+		$('#no-trailname-error').show();
+
 	} else {
-		// call saveTrail function
+		
+		$("#enter-trail-name").hide();
+		$("#loading").show();
 		saveTrail();
 	}	
 	
