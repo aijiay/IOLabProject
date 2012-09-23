@@ -7,10 +7,13 @@ var ori_length;
 $(document).on("ready", function() {
 
 
+
 $('#initial-btn').on('click', function() {
 	var trailname = "Test Trail";
 
-	
+	document.body.style.height= '80px';
+	document.getElementsByTagName("html")[0].style.height = '80px';
+
 	chrome.windows.getCurrent (function (win) {
 		chrome.tabs.getAllInWindow (win.id, function (tabs) {
 			for (var i=0; i<tabs.length; i++) {
@@ -32,6 +35,8 @@ $('#initial-btn').on('click', function() {
 	
 	$('#start-page').hide();
 	$('#login-page').show();
+		document.body.style.height= '200px';
+		document.getElementsByTagName("html")[0].style.height = '200px';
 
 }); // end of initial-btn click function
 
@@ -102,6 +107,9 @@ function checkLogin(){
 function checkLoginComplete(){
 	$('#login-page').hide();
 	$('#enter-trail-name').show();
+
+	document.body.style.height= '100px';
+	document.getElementsByTagName("html")[0].style.height = '100px';
 }
 
 

@@ -224,7 +224,7 @@ a:hover {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 300px;
+ 
 }
 
 .span12 {
@@ -5022,7 +5022,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .tooltip-inner {
-  max-width: 200px;
+  max-width: 100px;
   padding: 3px 8px;
   color: #ffffff;
   text-align: center;
