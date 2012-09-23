@@ -1,7 +1,6 @@
 .delete {
 	display:none;
 	opacity:0.5;
-
 }
 
 .delete:hover {
@@ -13,6 +12,10 @@
 .page-content {
 	padding-left:30px;
 	padding-right:30px;
+	padding-top:15px;
+	padding-bottom:15px;
+}
+.span-page-content {
 	padding-top:15px;
 	padding-bottom:15px;
 }
@@ -34,4 +37,3 @@
 	margin-left: 0px;
 	margin-right: 10px;
 }
-
