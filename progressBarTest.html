@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+	<style type="text/css">
+		.page-content {
+			width:80%;
+		}
+	</style>
+
+
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+	<script type="text/javascript">
+
+		// http://stackoverflow.com/questions/10007212/twitter-bootstrap-progress-bar-animation-on-page-load
+
+	$(document).on("ready", function() {
+
+			var progress = setInterval( function() {
+
+				var p = 50 * 5
+			//	var full-bar = $('#page-content').width;
+			//	console.log(full-bar);
+				var $bar = $('.bar');
+				if ($bar.width() == $('#page-content').width()) {
+					clearInterval(progress);
+					$('.progress').removeClass('active');
+					} else {
+						$bar.width($bar.width()+p);
+					}
+			
+				}, 1000);
+		});	
+	</script>
+</head>
+<body>
+	<div class="page-content">
+	<div class="progress progress-striped active">
+	 	 <div class="bar" style="width: 0%;" id="progress-bar"></div>
+	 </div>
+ 	</div>
+</body>
+<html>

@@ -14,6 +14,7 @@
 	padding-left:30px;
 	padding-right:30px;
 	padding-top:15px;
+	padding-bottom:15px;
 }
 
 .header-bar {
@@ -27,5 +28,10 @@
 	width: 100%;
 	height: 25px;
 	bottom: 0px;
+}
+
+.button-span {
+	margin-left: 0px;
+	margin-right: 10px;
 }
 
