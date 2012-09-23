@@ -29,15 +29,6 @@ $('#initial-btn').on('click', function() {
 			ori_length=tabsData.length;
 		}); });
 
-	/*var tab= {};
-	tab.url="blah";
-	tab.title="tIIIItle";
-	tabsData.push (tab);
-	*/
-
-	//console.log(tabsData);
-	//console.log("Weeeee");
-
 	
 	$('#start-page').hide();
 	$('#login-page').show();
@@ -58,12 +49,16 @@ $('#enter-trail-name').on('submit', function () {
 	$("#loading").show();
 
 
+
 	trailname = $('#new-trailname').val();
-	console.log(tabsData);
-	console.log(trailname);
-	console.log(tabsData.length);
-	// call saveTrail function
-	saveTrail();
+
+	if ($.trim(trailname) ==="") {
+		$('#no-trail-name-error').show();
+	} else {
+		// call saveTrail function
+		saveTrail();
+	}	
+	
 
 	return false;
 
