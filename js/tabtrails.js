@@ -26,7 +26,7 @@ $('#initial-btn').on('click', function() {
 				tabsData.push(tab);
 
 			} //end for loop
-
+			ori_length=tabsData.length;
 		}); });
 
 	/*var tab= {};
@@ -38,7 +38,7 @@ $('#initial-btn').on('click', function() {
 	//console.log(tabsData);
 	//console.log("Weeeee");
 
-	ori_length=tabsData.length;
+	
 	$('#start-page').hide();
 	$('#login-page').show();
 
