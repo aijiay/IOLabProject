@@ -6,7 +6,6 @@ var ori_length;
 
 $(document).on("ready", function() {
 
-
 $('#initial-btn').on('click', function() {
 	var trailname = "Test Trail";
 
@@ -67,8 +66,6 @@ $('#enter-trail-name').on('submit', function () {
 
 
 }); // end of document-on-ready
-
-
 
 
 function checkLogin(){
@@ -152,16 +149,27 @@ function saveTrail() {
 		                        setTimeout(saveTrail, 1000);
 		                        
 		            } else {
-		            	console.log ("It's allsaved");
+
+		            	$('#progress-bar').css('width', '100%');
+
+		            	//console.log ("It's all saved");
 						$('#finished').show();
+
+						$('#go-to-delicious').click(function() {
+							chrome.tabs.create({url: "http://delicious.com/"+ delicious.username, active:false});
+						});
+
 						$('#loading').hide();
 		            }
 		}
                 });
 		
 	//} //end for loop
+	
 
 	console.log("DONE SAVE TRAIL");
+
+
 
 }// end of function
 
