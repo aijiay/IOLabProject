@@ -1,7 +1,3 @@
-body{
-	height:80px;
-}
-
 .delete {
 	display:none;
 	opacity:0.5;
@@ -40,4 +36,7 @@ body{
 .button-span {
 	margin-left: 0px;
 	margin-right: 10px;
+}
+.button{
+	float:right;
 }

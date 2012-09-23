@@ -6,11 +6,6 @@ var ori_length;
 
 $(document).on("ready", function() {
 
-	document.body.style.height= '80px';
-	document.getElementsByTagName("html")[0].style.height = '80px';
-	document.body.style.width= '300px';
-	document.getElementsByTagName("html")[0].style.width =  '300px';
-
 $('#initial-btn').on('click', function() {
 	var trailname = "Test Trail";
 
@@ -38,8 +33,8 @@ $('#initial-btn').on('click', function() {
 	
 	$('#start-page').hide();
 	$('#login-page').show();
-		document.body.style.height= '200px';
-		document.getElementsByTagName("html")[0].style.height = '200px';
+		document.body.style.height= '180px';
+		document.getElementsByTagName("html")[0].style.height = '180px';
 
 }); // end of initial-btn click function
 
@@ -51,7 +46,7 @@ $('#submit-login').on('click', function(){
 });
 
 
-$('#enter-trail-name').on('submit', function () {
+$('#enter-trail-name-form').on('submit', function () {
 
 
 
@@ -75,8 +70,6 @@ $('#enter-trail-name').on('submit', function () {
 
 
 }); // end of document-on-ready
-
-
 
 
 function checkLogin(){
@@ -163,16 +156,27 @@ function saveTrail() {
 		                        setTimeout(saveTrail, 1000);
 		                        
 		            } else {
-		            	console.log ("It's allsaved");
+
+		            	$('#progress-bar').css('width', '100%');
+
+		            	//console.log ("It's all saved");
 						$('#finished').show();
+
+						$('#go-to-delicious').click(function() {
+							chrome.tabs.create({url: "http://delicious.com/"+ delicious.username, active:false});
+						});
+
 						$('#loading').hide();
 		            }
 		}
                 });
 		
 	//} //end for loop
+	
 
 	console.log("DONE SAVE TRAIL");
+
+
 
 }// end of function
 

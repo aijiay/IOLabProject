@@ -22,25 +22,26 @@
 
 			<label for="username">Username: </label><input id="username" type="text" class="input-medium" /><br />
 			<label for="password">Password: </label><input id="password" type="password" class="input-medium" /><br />
-			<input id="submit-login" class="btn btn-success" type="submit" value="Sign In" />
+			<input id="submit-login" class="btn btn-success button" type="submit" value="Sign In" />
 
 		</form>
 		<div class="alert alert-error" style="display:none" id="login-error">  <strong>Error!</strong> Wrong login.	</div>
 		<div class="alert alert-error" style="display:none" id="unknown-error">  <strong>Error!</strong> Unknown error.	</div>
-
+		</div>
 	</div>
 
 	
 
-	
-	<form id="enter-trail-name" style="display:none;" class="container page-content">
+	<div id="enter-trail-name" style="display:none;" class="container page-content span3">
+	<form id="enter-trail-name-form">
 		<p>Enter a name for the new trail!</p>
-		<span>
-		<input type="text" name="trail-name" id="new-trailname"/> 
-		<input type="submit" name="save-btn" class="btn btn-success" value="Save" />
-		</span>
-		<div class="alert alert-error" style="display:none" id="no-trailname-error">  Enter a valid trailname.	</div>
+		
+			<input type="text" name="trail-name" id="new-trailname" class="input-medium"/><br />
+			<input type="submit" name="save-btn" class="btn btn-success button" value="Save" />
+		
+		<div class="alert alert-error" style="display:none" id="no-trailname-error">Enter a valid trailname.</div>
 	</form>
+	</div>
 
 	<div id="loading" style="display:none;" class="span4 span-page-content">
 		<div class="alert" id="saving"><button type="button" class="close" data-dismiss="alert">x</button><strong>Saving new trail...</strong></div>
@@ -54,16 +55,11 @@
 	<!--Bookmark added!-->
 
 	<div id="finished" class="container span-page-content span4" style="display:none;">
-		<div class="page-content"><p>Done!</p></div>
-
-	<div id="finished" class="container" style="display:none;">
-		<p>Congratulations! Your new trail has been saved succesfully to your Delicious.</p>
-		<a href="#" id="go-to-delicious"class="btn btn-success">Go to Delicious now!</a>
-		
-
+		<div class="page-content"><p>Congratulations! Your new trail has been saved successfully to your Delicious.</p>
+			<a href="#" id="go-to-delicious"class="btn btn-success">Go to Delicious now!</a></div>
 	</div>
 
 	
-</div>
+
 </body>
 </html>

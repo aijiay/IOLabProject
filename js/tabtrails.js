@@ -33,8 +33,8 @@ $('#initial-btn').on('click', function() {
 	
 	$('#start-page').hide();
 	$('#login-page').show();
-		document.body.style.height= '200px';
-		document.getElementsByTagName("html")[0].style.height = '200px';
+		document.body.style.height= '160px';
+		document.getElementsByTagName("html")[0].style.height = '160px';
 
 }); // end of initial-btn click function
 
@@ -46,7 +46,7 @@ $('#submit-login').on('click', function(){
 });
 
 
-$('#enter-trail-name').on('submit', function () {
+$('#enter-trail-name-form').on('submit', function () {
 
 
 
