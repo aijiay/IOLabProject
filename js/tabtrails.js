@@ -1,8 +1,8 @@
 var delicious={};
-var tabsData = [];
+var tabsData = []; // saves the titles and URL's of tabs
 var tabsDataIndex = 0;
 var trailname;
-var ori_length;
+var ori_length;  //saves the # of tabs in the trail
 
 $(document).on("ready", function() {
 
@@ -12,6 +12,8 @@ $('#initial-btn').on('click', function() {
 	document.body.style.height= '80px';
 	document.getElementsByTagName("html")[0].style.height = '80px';
 
+
+	//saves all open tabs in open window into tabsData
 	chrome.windows.getCurrent (function (win) {
 		chrome.tabs.getAllInWindow (win.id, function (tabs) {
 			for (var i=0; i<tabs.length; i++) {
@@ -30,11 +32,11 @@ $('#initial-btn').on('click', function() {
 			ori_length=tabsData.length;
 		}); });
 
-	
+	//move on to the next screen
 	$('#start-page').hide();
 	$('#login-page').show();
-		document.body.style.height= '160px';
-		document.getElementsByTagName("html")[0].style.height = '160px';
+	document.body.style.height= '160px';
+	document.getElementsByTagName("html")[0].style.height = '160px';
 
 }); // end of initial-btn click function
 
@@ -47,9 +49,6 @@ $('#submit-login').on('click', function(){
 
 
 $('#enter-trail-name-form').on('submit', function () {
-
-
-
 
 	trailname = $('#new-trailname').val();
 
@@ -74,8 +73,8 @@ $('#enter-trail-name-form').on('submit', function () {
 
 function checkLogin(){
 
-	console.log(delicious.username);
-	console.log(delicious.password);
+	//console.log(delicious.username);
+	//console.log(delicious.password);
 	console.log("U/P printed inside saveLogin()");
 
 	var postData = {
@@ -94,7 +93,7 @@ function checkLogin(){
                   					 
                        					 } else {
                             					// We're ok - continue with the login;
-								checkLoginComplete();
+												checkLoginComplete();
                        					 }
                     				});
 				
@@ -134,49 +133,49 @@ function saveTrail() {
 			//alert("function rsp called");
                     if (rsp.result_code === "access denied") {
                         //alert('The provided Delicious username and password are incorrect.');
+                        //woudln't happen 
                     } else if (rsp.result_code === "something went wrong") {
                         //alert('There was an unspecified error communicating with Delicious.');
+                        //woudln't happen 
                     } else if (rsp.result_code === "done") {
                       
-					tabsData.splice(0,1);
-					if (tabsData.length > 0) {
-						
-							//alert("SAVE this TRAIL");
+						tabsData.splice(0,1);
+						if (tabsData.length > 0) {
+								//saves 1 tab at a time
+							
+								//alert("SAVE this TRAIL");
 
-		                        //$("#saving").append ("# " + tabsDataIndex + " is saved.");\
+			                        //$("#saving").append ("# " + tabsDataIndex + " is saved.");\
 
-		                        console.log("ori: "+ori_length);
-		                        console.log("tabs data length"+tabsData.length);
+			                        console.log("ori: "+ori_length);
+			                        console.log("tabs data length"+tabsData.length);
 
-		                        var p= (ori_length- tabsData.length ) / ori_length*100;
-		                        console.log(p);
-		                        $('#progress-bar').css('width', ''+p+'%');
-		                        console.log ("# "+ tabsDataIndex +" is saved.");
-								tabsDataIndex++;
-		                        setTimeout(saveTrail, 1000);
+			                        var p= (ori_length- tabsData.length ) / ori_length*100;
+			                        console.log(p);
+			                        $('#progress-bar').css('width', ''+p+'%');
+			                        console.log ("# "+ tabsDataIndex +" is saved.");
+									tabsDataIndex++;
+			                        setTimeout(saveTrail, 1000);
 		                        
-		            } else {
+			            } else {
+			            	//done with saving all the tabs. move to the next screen.
 
-		            	$('#progress-bar').css('width', '100%');
+			            	$('#progress-bar').css('width', '100%');
+							$('#finished').show();
 
-		            	//console.log ("It's all saved");
-						$('#finished').show();
+							$('#go-to-delicious').click(function() {
+								chrome.tabs.create({url: "http://delicious.com/"+ delicious.username, active:false});
+							});
 
-						$('#go-to-delicious').click(function() {
-							chrome.tabs.create({url: "http://delicious.com/"+ delicious.username, active:false});
-						});
-
-						$('#loading').hide();
-		            }
+							$('#loading').hide();
+			            }
 		}
                 });
 		
-	//} //end for loop
-	
 
 	console.log("DONE SAVE TRAIL");
 
 
 
-}// end of function
+}// end of saveTrail function
 
